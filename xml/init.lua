@@ -6,8 +6,7 @@
 
   <html><a href="https://github.com/lubyk/xml"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></html>
 
-  This module is part of the [lubyk](http://lubyk.org) project. *MIT license*
-  &copy; Gaspard Bucher 2014.
+  *MIT license* &copy Marcin Kalicinski 2006, 2009, Gaspard Bucher 2014.
 
   ## Installation
   
@@ -17,7 +16,7 @@
   
   ## Usage example
 
-    local data = xml.parse(some_xml)
+    local data = xml.load(some_xml)
 
     local xml_string = xml.dump(some_table)
 
@@ -33,7 +32,7 @@ local parser  = lib.Parser()
 
 
 -- Current version respecting [semantic versioning](http://semver.org).
-lib.VERSION = '1.0.0'
+lib.VERSION = '1.1.0'
 
 lib.DEPENDS = { -- doc
   -- Compatible with Lua 5.1, 5.2 and LuaJIT
@@ -92,24 +91,28 @@ lib.DEPENDS = { -- doc
 
 -- Parse a `string` containing xml content and return a table. Uses
 -- xml.Parser with the xml.Parser.Default type.
-function lib.parse(string)
-  return parser:parse(string)
+function lib.load(string)
+  return parser:load(string)
 end
 
 -- Parse the XML content of the file at `path` and return a lua table. Uses
 -- xml.Parser with the xml.Parser.Default type.
-function lib.load(path)
-  return parser:parse(lub.content(path))
+function lib.loadpath(path)
+  return parser:load(lub.content(path))
 end
 
 local function escape(v)
-  return v:gsub('&','&amp;'):gsub('>','&gt;'):gsub('<','&lt;'):gsub("'",'&apos;')
+  if type(v) == 'boolean' then
+    return v and 'true' or 'false'
+  else
+    return v:gsub('&','&amp;'):gsub('>','&gt;'):gsub('<','&lt;'):gsub("'",'&apos;')
+  end
 end
 
 local function tagWithAttributes(data)
   local res = data.xml or 'table'
   for k,v in pairs(data) do
-    if k ~= 'xml' and type(k) ~= 'number' then
+    if k ~= 'xml' and type(k) == 'string' then
       res = res .. ' ' .. k .. "='" .. escape(v) .. "'"
     end
   end
@@ -174,7 +177,7 @@ end
 --
 -- Example:
 --
---   local data = xml.parse [[
+--   local data = xml.load [[
 --    <foo:document xmlns:foo='bar'>
 --      <foo:name>Blah</foo:name>
 --    </foo:document>

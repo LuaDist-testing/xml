@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "xml"
-version = "1.0.0-1"
+version = "1.1.0-1"
 -- LuaDist source
 source = {
-  tag = "1.0.0-1",
+  tag = "1.1.0-1",
   url = "git://github.com/LuaDist-testing/xml.git"
 }
 -- Original source
 -- source = {
---   url = 'https://github.com/lubyk/xml/archive/REL-1.0.0.tar.gz',
---   dir = 'xml-REL-1.0.0',
+--   url = 'https://github.com/lubyk/xml/archive/REL-1.1.0.tar.gz',
+--   dir = 'xml-REL-1.1.0',
 -- }
 description = {
   summary = "Very fast xml parser based on RapidXML",

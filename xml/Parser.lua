@@ -1,17 +1,9 @@
 --[[------------------------------------------------------
-  # Very fast xml parser
-
-  The parser does not return information on comments, declarations,
-  doctypes and pi nodes. These are validly parsed but not returned.
-
-  This module is part of [lubyk](http://lubyk.org) project.  
-  Install with [luarocks](http://luarocks.org) or [luadist](http://luadist.org).
-
-    $ luarocks install xml    or    luadist install xml
+  # Parser object
   
-  Dump a table to xml example:
-
-    local xml = require 'xml'
+  The parser class is used to encapsulate parsing and settings in an object. When
+  using default settings, it is not necessary to create parser objects and
+  one can simply use [xml.load](xml.html#load).
 
 --]]------------------------------------------------------
 local core = require 'xml.core'
@@ -37,7 +29,7 @@ local lib  = core.Parser
 -- lib.Fastest
 
 -- Create a new parser. `type` flag is optional. If you are using the default
--- parser, you can simply use [xml.parse](xml.html#parse).
+-- parser, you can simply use [xml.load](xml.html#load).
 -- Usage example:
 --
 --   local xml = require 'xml'
@@ -47,17 +39,17 @@ local lib  = core.Parser
 -- Parse an xml string and return a Lua table. See [lua/xml](xml.html)
 -- for the format of the returned table. Usage:
 --
---   local data = parser:parse(some_xml_string)
+--   local data = parser:load(some_xml_string)
 --   --> lua table
--- function lib:parse(str)
+-- function lib:load(str)
 
 -- Parse xml from file `path` and return a Lua table. See [lua/xml](xml.html)
 -- for the format of the returned table. Usage:
 --
---   local data = parser:load(path_to_file)
+--   local data = parser:loadpath(path_to_file)
 --   --> lua table
-function lib:load(path)
-  return self:parse(lub.content(path))
+function lib:loadpath(path)
+  return self:load(lub.content(path))
 end
 
 return lib
