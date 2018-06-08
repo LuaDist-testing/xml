@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "xml"
-version = "1.1.0-1"
+version = "1.1.1-1"
 -- LuaDist source
 source = {
-  tag = "1.1.0-1",
+  tag = "1.1.1-1",
   url = "git://github.com/LuaDist-testing/xml.git"
 }
 -- Original source
 -- source = {
---   url = 'https://github.com/lubyk/xml/archive/REL-1.1.0.tar.gz',
---   dir = 'xml-REL-1.1.0',
+--   url = 'https://github.com/lubyk/xml/archive/REL-1.1.1.tar.gz',
+--   dir = 'xml-REL-1.1.1',
 -- }
 description = {
   summary = "Very fast xml parser based on RapidXML",
@@ -23,14 +23,15 @@ description = {
      - Based on proven code (RapidXML)
      - Full test coverage
 
-     Read the documentation at http://doc.lubyk.org/xml.html.
+    Read the documentation at http://doc.lubyk.org/xml.html.
   ]],
   homepage = "http://doc.lubyk.org/xml.html",
   license = "MIT"
 }
+
 dependencies = {
   "lua >= 5.1, < 5.3",
-  "lub >= 1.0.3, < 1.1",
+  "lub >= 1.0.3, < 2",
 }
 build = {
   type = 'builtin',
@@ -38,17 +39,16 @@ build = {
     -- Plain Lua files
     ['xml'            ] = 'xml/init.lua',
     ['xml.Parser'     ] = 'xml/Parser.lua',
-    -- C++ modules
+    -- C module
     ['xml.core'       ] = {
       sources = {
-        'src/bind/dub/dub.cpp',
-        'src/bind/xml_core.cpp',
-        'src/bind/xml_Parser.cpp',
         'src/Parser.cpp',
+        'src/bind/dub/dub.cpp',
+        'src/bind/xml_Parser.cpp',
+        'src/bind/xml_core.cpp',
       },
-      incdirs = {'include', 'src/bind', 'src/vendor'},
+      incdirs   = {'include', 'src/bind', 'src/vendor'},
       libraries = {'stdc++'},
     },
   },
 }
-

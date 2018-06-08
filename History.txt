@@ -1,8 +1,15 @@
-== 1.1.0 2014-01-29
+== 1.1.1 2014-08-15
+
+  * Fixed lub dependency information.
+  * Using lut.Builder to update build files.
+
+== 1.1.0 2014-02-01
 
   * Changes in API to reflect yaml library. 'parse' is now 'load' and 'load'
     is 'loadpath'.
-  * Fixed
+  * Fixed bindings by using latest dub binder.
+  * Added support for CMake build.
+
 == 1.0.0 2014-01-26
 
   * Initial release.
